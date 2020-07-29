@@ -1,0 +1,40 @@
+﻿@model IEnumerable<HelloMVCWorld.Models.Spent>;
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Func<dynamic, object> spentTemplate = @<tr>
+        <td>@item.Name</td>
+        <td>@item.Amount</td>
+        <td><a asp-page="/Edit/{id}"><i class="fa fa-pencil"></i></a></td>
+        <td><a asp-page="/Delete/{id}"><i class="fa fa-trash"></i></a></td>
+    </tr>;
+var total = Model.Sum(m => m.Amount);
+}
+<div class="container">
+    <div class="form-element-group">
+        <input type="text" class="form-element" placeholder="{{ menu.filter }}">
+        <span class="form-element-extra"><i class="fa fa-filter"></i></span>
+    </div>
+</div>
+
+<div class="container">
+    @* Filter results *@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ spent.name }}</th>
+                <th>{{ spent.amount }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var spent in Model)
+            {
+                @spentTemplate(spent);
+            }
+            <tr><td>Total</td><td>@total</td></tr>
+        </tbody>
+    </table>
+</div>
+
+
+
