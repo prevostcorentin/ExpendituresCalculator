@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using EasySpents;
+using EasySpents.Models;
+using EasySpents.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +13,24 @@ namespace HelloMVCWorld.Controllers
 {
     public class SpentController : Controller
     {
+        private SpentContext _context;
+        private Services.FilterService _filterService;
+
+        public SpentController(SpentContext injectedContext, Services.FilterService injectedFilterService)
+        {
+            _context = injectedContext;
+            _filterService = injectedFilterService;
+        }
+
         // GET: Spent
         public ActionResult Index()
         {
-            return View();
+            ICollection<FilterCriteria> criterias = new List<FilterCriteria>
+            {
+                new FilterCriteria { Name = "Name", Value = "Socks" }
+            };
+            IEnumerable<Spent> filteredSpents = _filterService.Apply(criterias, _context.Spents);
+            return View(filteredSpents);
         }
 
         // GET: Spent/Details/5

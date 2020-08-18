@@ -23,15 +23,7 @@ namespace Controllers.HelloMVCWorld
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var filter = new Filter<Spent>
-            {
-                Criterias = new List<FilterCriteria> {
-                    new FilterCriteria { Value = 10, Name = "Amount" },
-                    new FilterCriteria { Value = "Random", Name = "Name" }
-                },
-                Data = _context.Spents
-            };
-            return View(filter.Result);
+            return View();
         }
     }
 }

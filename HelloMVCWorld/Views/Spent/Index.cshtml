@@ -1,35 +1,40 @@
-﻿@model EasySpents.Models.Spent
+﻿@model IEnumerable<EasySpents.Models.Spent>
 
 @{
     ViewData["Title"] = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Func<EasySpents.Models.Spent, object> spentTemplate = @<tr>
+        <td>@item.Name</td>
+        <td>@item.DateTime</td>
+        <td>@item.Amount</td>
+        <td><a asp-page="/Edit/{id}"><i class="fa fa-pencil"></i></a></td>
+        <td><a asp-page="/Delete/{id}"><i class="fa fa-trash"></i></a></td>
+    </tr>;
 }
 
 <div class="container">
-    <form asp-action="View">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-element-group">
-            <label asp-for="SpentId" class="control-label"></label>
-            <input asp-for="SpentId" class="form-control" />
-            <span asp-validation-for="SpentId" class="text-danger"></span>
-        </div>
-        <div class="form-element-group">
-            <label asp-for="Amount" class="control-label"></label>
-            <input asp-for="Amount" class="form-control" />
-            <span asp-validation-for="Amount" class="text-danger"></span>
-        </div>
-        <div class="form-element-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="form-element-group">
-            <label asp-for="DateTime" class="control-label"></label>
-            <input asp-for="DateTime" class="form-control" />
-            <span asp-validation-for="DateTime" class="text-danger"></span>
-        </div>
-        <div class="form-element-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </form>
+    <div class="form-element-group">
+        <input id="spent-filter" type="text" class="form-element" placeholder="{{ menu.filter }}">
+        <span class="form-element-extra"><i class="fa fa-filter"></i></span>
+    </div>
+</div>
+
+<div class="container">
+    @* Filter results *@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ spent.name }}</th>
+                <th>{{ spent.date }}</th>
+                <th>{{ spent.amount }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var spent in Model)
+            {
+                @spentTemplate(spent);
+            }
+        </tbody>
+    </table>
 </div>

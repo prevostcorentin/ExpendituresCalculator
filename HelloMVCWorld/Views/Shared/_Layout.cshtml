@@ -1,4 +1,8 @@
-﻿<!DOCTYPE HTML>
+﻿@{
+    Layout = "~/Views/Shared/_ViewImports.cshtml";
+}
+
+<!DOCTYPE HTML>
 
 <html>
 <head>
@@ -17,8 +21,8 @@
                     <a href="#" class="">Brand</a>
                 </div>
                 <nav class="right-float">
-                    <a href="#" class="btn-pill">{{ navigation.home }}</a>
-                    <a href="/Spent" class="btn-pill">{{ navigation.spents }}</a>
+                    <a asp-controller="Home" asp-action="Index" class="btn-pill">{{ navigation.home }}</a>
+                    <a asp-controller="Spent" asp-action="Index" class="btn-pill">{{ navigation.spents }}</a>
                     <a href="#" class="btn-pill">{{ navigation.about }}</a>
                     <a href="#" class="btn btn-pill btn-primary-outline">{{ navigation.admin }}</a>
                 </nav>

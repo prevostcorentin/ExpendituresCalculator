@@ -41,7 +41,9 @@ namespace EasySpents.Services
                 {
                     object propertyValue = filterable.GetType().GetProperty(criteria.Name).GetValue(filterable);
                     Type propertyType = propertyValue.GetType();
-                    if (criteria.Value == propertyValue)
+                    dynamic typedPropertyValue = Convert.ChangeType(propertyValue, propertyType);
+                    dynamic typedCriteria = Convert.ChangeType(criteria.Value, propertyType);
+                    if (typedCriteria == typedPropertyValue)
                     {
                         return true;
                     }
