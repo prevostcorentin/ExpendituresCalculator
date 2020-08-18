@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HelloMVCWorld.Models
+namespace EasySpents.Models
 {
     public class Spent
     {
-        private List<Spent> _subSpents;
+        public Guid SpentId { get; set; }
         public Double Amount { get; set; }
         public String Name { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

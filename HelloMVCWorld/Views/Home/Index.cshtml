@@ -1,14 +1,15 @@
-﻿@model IEnumerable<HelloMVCWorld.Models.Spent>;
+﻿@model IEnumerable<EasySpents.Models.Spent>;
 @{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Func<dynamic, object> spentTemplate = @<tr>
+    Func<EasySpents.Models.Spent, object> spentTemplate = @<tr>
         <td>@item.Name</td>
+        <td>@item.DateTime</td>
         <td>@item.Amount</td>
         <td><a asp-page="/Edit/{id}"><i class="fa fa-pencil"></i></a></td>
         <td><a asp-page="/Delete/{id}"><i class="fa fa-trash"></i></a></td>
     </tr>;
-var total = Model.Sum(m => m.Amount);
+    var total = Model.Sum(m => m.Amount);
 }
 <div class="container">
     <div class="form-element-group">
@@ -23,6 +24,7 @@ var total = Model.Sum(m => m.Amount);
         <thead>
             <tr>
                 <th>{{ spent.name }}</th>
+                <th>{{ spent.date }}</th>
                 <th>{{ spent.amount }}</th>
             </tr>
         </thead>
@@ -31,7 +33,7 @@ var total = Model.Sum(m => m.Amount);
             {
                 @spentTemplate(spent);
             }
-            <tr><td>Total</td><td>@total</td></tr>
+            <tr><td>Total</td><td></td></td><td>@total</td></tr>
         </tbody>
     </table>
 </div>
