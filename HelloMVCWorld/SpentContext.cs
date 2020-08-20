@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EasySpents.Models;
+using SpentCalculator.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EasySpents
+namespace SpentCalculator
 {
     public class SpentContext : DbContext
     {

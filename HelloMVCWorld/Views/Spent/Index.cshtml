@@ -1,10 +1,10 @@
-﻿@model IEnumerable<EasySpents.Models.Spent>
+﻿@model IEnumerable<SpentCalculator.Models.Spent>
 
 @{
     ViewData["Title"] = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    Func<EasySpents.Models.Spent, object> spentTemplate = @<tr>
+    Func<SpentCalculator.Models.Spent, object> spentTemplate = @<tr>
         <td>@item.Name</td>
         <td>@item.DateTime</td>
         <td>@item.Amount</td>

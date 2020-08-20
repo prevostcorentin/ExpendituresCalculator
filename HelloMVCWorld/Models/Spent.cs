@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EasySpents.Models
+namespace SpentCalculator.Models
 {
     public class Spent
     {

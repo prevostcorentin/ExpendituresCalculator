@@ -9,11 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Services;
-using EasySpents.Services;
-using EasySpents.Models;
+using SpentCalculator.Services;
+using SpentCalculator.Models;
 
-namespace EasySpents
+namespace SpentCalculator
 {
     public class Startup
     {
@@ -29,8 +28,8 @@ namespace EasySpents
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SpentContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddScoped<FilterService, FilterService>();
             services.AddScoped<Filter<Spent>, Filter<Spent>>();
+            services.AddScoped<FilterService, FilterService>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 

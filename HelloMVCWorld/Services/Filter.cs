@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace EasySpents.Services
+namespace SpentCalculator.Services
 {
     public struct FilterCriteria
     {

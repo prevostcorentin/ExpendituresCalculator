@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EasySpents;
-using EasySpents.Models;
-using EasySpents.Services;
+using SpentCalculator;
+using SpentCalculator.Models;
+using SpentCalculator.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

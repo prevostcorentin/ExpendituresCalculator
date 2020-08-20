@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using EasySpents;
-using EasySpents.Models;
-using EasySpents.Services;
+using SpentCalculator;
+using SpentCalculator.Models;
+using SpentCalculator.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HelloMVCWorld.Controllers
+namespace SpentCalculator.Controllers
 {
     public class SpentController : Controller
     {
@@ -29,7 +29,7 @@ namespace HelloMVCWorld.Controllers
             {
                 new FilterCriteria { Name = "Name", Value = "Socks" }
             };
-            IEnumerable<Spent> filteredSpents = _filterService.Apply(criterias, _context.Spents);
+            IEnumerable<Spent> filteredSpents = _filterService.ApplyFilter(criterias, _context.Spents);
             return View(filteredSpents);
         }
 

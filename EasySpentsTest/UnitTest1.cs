@@ -1,11 +1,11 @@
-using EasySpents.Models;
-using EasySpents.Services;
+using SpentCalculator.Models;
+using SpentCalculator.Services;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EasySpentsTest
+namespace SpentCalculatorTest
 {
     public class Tests
     {
@@ -30,7 +30,7 @@ namespace EasySpentsTest
             {
                 Criterias = new List<FilterCriteria>()
                 {
-                    new FilterCriteria { Name = "In" }
+                    new FilterCriteria { Name = "Name", Value = "In" }
                 },
                 Data = spents
             };
@@ -39,6 +39,7 @@ namespace EasySpentsTest
 
             Assert.AreEqual(spents[0].SpentId, filterResult[0].SpentId);
             Assert.AreEqual(spents[1].SpentId, filterResult[1].SpentId);
+            Assert.AreEqual(filterResult, 2);
         }
     }
 }
