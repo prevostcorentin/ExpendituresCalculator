@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using SpentCalculator.Services;
-using SpentCalculator.Models;
+using ExpendituresCalculator.Services;
+using ExpendituresCalculator.Models;
 
-namespace SpentCalculator
+namespace ExpendituresCalculator
 {
     public class Startup
     {

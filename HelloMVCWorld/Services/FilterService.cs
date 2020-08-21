@@ -1,11 +1,11 @@
-﻿using SpentCalculator.Models;
-using SpentCalculator.Services;
+﻿using ExpendituresCalculator.Models;
+using ExpendituresCalculator.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SpentCalculator.Services
+namespace ExpendituresCalculator.Services
 {
     public class FilterService
     {

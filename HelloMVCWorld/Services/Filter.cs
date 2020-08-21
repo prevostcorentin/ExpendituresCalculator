@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace SpentCalculator.Services
+namespace ExpendituresCalculator.Services
 {
     public struct FilterCriteria
     {
@@ -22,7 +24,7 @@ namespace SpentCalculator.Services
                 var matchingSet = new Queue<T>();
                 foreach (T filterable in Data)
                 {
-                    if (IsMatchingObject(filterable))
+                    if (IsObjectMatching(filterable))
                     {
                         matchingSet.Enqueue(filterable);
                     }
@@ -31,23 +33,32 @@ namespace SpentCalculator.Services
             }
         }
 
-        public bool IsMatchingObject(object filterable)
+        public bool IsObjectMatching(object filterable)
         {
-            var filterablePropertiesNames = filterable.GetType().GetProperties()
-                                                                .Select(p => p.Name.ToLower());
             foreach (FilterCriteria criteria in Criterias)
             {
-                if (filterablePropertiesNames.Contains(criteria.Name.ToLower()))
+                if (IsCriteriaMatchesFilterable(criteria, filterable))
                 {
-                    object propertyValue = filterable.GetType().GetProperty(criteria.Name).GetValue(filterable);
-                    Type propertyType = propertyValue.GetType();
-                    dynamic typedPropertyValue = Convert.ChangeType(propertyValue, propertyType);
-                    dynamic typedCriteria = Convert.ChangeType(criteria.Value, propertyType);
-                    if (typedCriteria == typedPropertyValue)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
+            }
+            return false;
+        }
+
+        private bool IsCriteriaMatchesFilterable(FilterCriteria criteria, object filterable)
+        {
+            bool filterableContainsCriteria = filterable.GetType().GetProperties()
+                                                        .Select(p => p.Name.ToLower())
+                                                        .Any(name => name == criteria.Name.ToLower());
+            if (!filterableContainsCriteria)
+            {
+                throw new StrongTypingException($"Criteria [{criteria}] does not match any object's property");
+            }
+            
+            object propertyValue = filterable.GetType().GetProperty(criteria.Name).GetValue(filterable);
+            if (Utils.Reflection.Equals(criteria.Value, propertyValue))
+            {
+                return true;
             }
             return false;
         }

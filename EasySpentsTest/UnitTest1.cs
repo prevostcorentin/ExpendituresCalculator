@@ -1,5 +1,5 @@
-using SpentCalculator.Models;
-using SpentCalculator.Services;
+using ExpendituresCalculator.Models;
+using ExpendituresCalculator.Services;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace SpentCalculatorTest
 
             Assert.AreEqual(spents[0].SpentId, filterResult[0].SpentId);
             Assert.AreEqual(spents[1].SpentId, filterResult[1].SpentId);
-            Assert.AreEqual(filterResult, 2);
+            Assert.AreEqual(filterResult.Length, 2);
         }
     }
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using SpentCalculator;
-using SpentCalculator.Models;
-using SpentCalculator.Services;
+using ExpendituresCalculator;
+using ExpendituresCalculator.Models;
+using ExpendituresCalculator.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SpentCalculator.Controllers
+namespace ExpendituresCalculator.Controllers
 {
     public class SpentController : Controller
     {
