@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ExpendituresCalculator.Services;
 using ExpendituresCalculator.Models;
+using Microsoft.Extensions.Logging;
+using Newtonsoft;
 
 namespace ExpendituresCalculator
 {
@@ -18,19 +20,20 @@ namespace ExpendituresCalculator
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration injectedConfiguration)
         {
-            Configuration = configuration;
+            Configuration = injectedConfiguration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SpentContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<SpentDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddScoped<Filter<Spent>, Filter<Spent>>();
-            services.AddScoped<FilterService, FilterService>();
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddScoped<FilterService<Spent>, FilterService<Spent>>();
+            services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +46,9 @@ namespace ExpendituresCalculator
             }
 
             app.UseMvc(
-                routes =>
-                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}")
+              routes =>
+                  routes.MapRoute(name: "default", 
+                                  template: "{controller=Home}/{action=Index}/{id?}")
             );
         }
     }

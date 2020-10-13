@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace ExpendituresCalculator.Services
 {
-    public class FilterService
+    public class FilterService<T>
     {
-        private Filter<Spent> _filter;
+        private Filter<T> _filter;
 
-        public FilterService(Filter<Spent> injectedFilter)
+        public FilterService(Filter<T> injectedFilter)
         {
             _filter = injectedFilter;
         }
 
-        public IEnumerable<Spent> ApplyFilter(ICollection<FilterCriteria> criterias, IEnumerable<Spent> data)
+        public IEnumerable<T> ApplyFilter(IEnumerable<T> data)
         {
-            _filter.Criterias = criterias;
             _filter.Data = data;
             return _filter.Result;
         }

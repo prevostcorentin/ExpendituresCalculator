@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace ExpendituresCalculator.Services
 {
@@ -11,6 +15,8 @@ namespace ExpendituresCalculator.Services
     {
         public String Name { get; set; }
         public object Value { get; set; }
+
+        public override String ToString() => $"[{Name}]";
     }
 
     public class Filter<T>
@@ -52,7 +58,7 @@ namespace ExpendituresCalculator.Services
                                                         .Any(name => name == criteria.Name.ToLower());
             if (!filterableContainsCriteria)
             {
-                throw new StrongTypingException($"Criteria [{criteria}] does not match any object's property");
+                throw new Exceptions.InvalidCriteriaException(filterable.GetType(), criteria);
             }
             
             object propertyValue = filterable.GetType().GetProperty(criteria.Name).GetValue(filterable);

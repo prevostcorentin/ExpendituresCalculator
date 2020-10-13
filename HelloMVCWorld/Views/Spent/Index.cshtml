@@ -8,8 +8,8 @@
         <td>@item.Name</td>
         <td>@item.DateTime</td>
         <td>@item.Amount</td>
-        <td><a asp-page="/Edit/{id}"><i class="fa fa-pencil"></i></a></td>
-        <td><a asp-page="/Delete/{id}"><i class="fa fa-trash"></i></a></td>
+        <td><a href="/Spent/Edit/@item.SpentId">!<!--<i class="fa fa-pencil"></i>--></a></td>
+        <td><a href="/Spent/Delete/@item.SpentId">-<!--<i class="fa fa-trash"></i>--></a></td>
     </tr>;
 }
 
@@ -35,6 +35,12 @@
             {
                 @spentTemplate(spent);
             }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>+</td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -13,9 +13,9 @@ namespace Controllers.HelloMVCWorld
 {
     public class HomeController : Controller
     {
-        private SpentContext _context;
+        private SpentDbContext _context;
 
-        public HomeController(SpentContext injectedContext)
+        public HomeController(SpentDbContext injectedContext)
         {
             _context = injectedContext;
         }

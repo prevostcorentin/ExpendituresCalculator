@@ -7,14 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExpendituresCalculator
 {
-    public class SpentContext : DbContext
+    public class SpentDbContext : DbContext
     {
-        public SpentContext(DbContextOptions<SpentContext> options)
+        public SpentDbContext(DbContextOptions<SpentDbContext> options)
             : base(options)
         {
         }
 
-        public SpentContext()
+        public SpentDbContext()
         {
         }
 
