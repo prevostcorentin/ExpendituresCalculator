@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 
 namespace ExpendituresCalculator.Services
 {
@@ -13,7 +15,7 @@ namespace ExpendituresCalculator.Services
             List<FilterCriteria> criterias = new List<FilterCriteria>();
             foreach (KeyValuePair<String, JToken> element in json)
             {
-                FilterCriteria singleCriteria = new FilterCriteria { Name = element.Key, Value = element.Value };
+                FilterCriteria singleCriteria = new FilterCriteria { Name = element.Key, Value = element.Value.ToString() };
                 criterias.Add(singleCriteria);
             }
             return criterias;
