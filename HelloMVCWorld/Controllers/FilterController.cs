@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using ExpendituresCalculator.Services;
 using ExpendituresCalculator.Models;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace ExpendituresCalculator.Controllers
 {

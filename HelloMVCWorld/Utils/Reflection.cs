@@ -13,10 +13,15 @@ namespace ExpendituresCalculator.Utils
             Type xType = x.GetType();
             Type yType = y.GetType();
             dynamic typedX = Convert.ChangeType(x, xType);
-            dynamic typedY = Convert.ChangeType(y, yType);
-            if(xType != yType)
+            dynamic typedY;
+
+            if (xType != yType)
             {
-                throw new StrongTypingException($"x is of type {xType} and y is of type {yType}");
+                typedY = Convert.ChangeType(y, xType);
+            }
+            else
+            {
+                typedY = Convert.ChangeType(y, yType);
             }
 
             if (typedY == typedX)
