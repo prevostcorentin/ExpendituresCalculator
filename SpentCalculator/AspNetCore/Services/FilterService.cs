@@ -1,9 +1,5 @@
-﻿using SpentCalculator.Models;
-using SpentCalculator.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 namespace SpentCalculator.Services
 {
@@ -18,17 +14,22 @@ namespace SpentCalculator.Services
 
         public IEnumerable<T> ApplyFilter(IEnumerable<T> data)
         {
-            TypeFilter();
+            TransformCriterias();
             _filter.Data = data;
             return _filter.Result;
         }
 
-        private void TypeFilter()
+        private void TransformCriterias()
         {
             List<FilterCriteria> typedCriterias = new List<FilterCriteria>();
-            foreach(var criteria in _filter.Criterias)
+            foreach (FilterCriteria criteria in _filter.Criterias)
             {
-                typedCriterias.Add(new FilterCriteria { Name = criteria.Name, Value = JsonTransformer.GetTypedFilterCriteriaValue(criteria) });
+                FilterCriteria singleCriteria = new FilterCriteria
+                {
+                    Name = criteria.Name,
+                    Value = JsonTransformer.JsonElementToTypedValue((JsonElement)criteria.Value)
+                };
+                typedCriterias.Add(singleCriteria);
             }
             _filter.Criterias = typedCriterias;
         }
