@@ -36,6 +36,16 @@ namespace SpentCalculator
             services.AddScoped<FilterService<Spent>, FilterService<Spent>>();
             services.AddRouting();
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +58,7 @@ namespace SpentCalculator
                     ExceptionHandler = new Exceptions.JsonExceptionMiddleware().Invoke
                 });
                 app.UseStaticFiles();
+                app.UseCors();
             }
             app.UseRouting();
             app.UseEndpoints(routes => routes.MapControllers());

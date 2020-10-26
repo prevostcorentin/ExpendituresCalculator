@@ -1,4 +1,10 @@
 {
+  "app": {
+    "title": "Expenditures calculator"
+  },
+  "menu": {
+    "filter": "Filter"
+  },
   "navigation": {
     "home": "Home",
     "spents": "Expenditures",
@@ -8,6 +14,6 @@
   "expenditure": {
     "name": "Name",
     "datetime": "Date",
-    "amount": "Amount ($)"
+    "amount": "Amount ({0})"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "app": {
+    "title": "Calculateur de dépenses"
+  },
+  "menu": {
+    "filter": "Filtre"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "spents": "Dépenses",
+    "about": "A propos",
+    "admin": "Administration"
+  },
+  "expenditure": {
+    "name": "Intitulé",
+    "datetime": "Date",
+    "amount": "Montant ({0})"
+  }
+}
