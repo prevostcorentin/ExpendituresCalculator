@@ -28,14 +28,14 @@ namespace SpentCalculator.Controllers
         [HttpPost]
         public IEnumerable<Spent> FilterSpents([FromBody] IEnumerable<FilterCriteria> criterias)
         {
-            IEnumerable<Spent> filteredResults; 
+            IEnumerable<Spent> filteredResults;
             if (criterias.Count() == 0)
             {
                 filteredResults = _context.Spents;
             }
             else
             {
-                var filter = new Filter<Spent> { Criterias = criterias };
+                var filter = FilterFactory<Spent>.Create(criterias);
                 var spentFilterService = new FilterService<Spent>(filter);
                 filteredResults = spentFilterService.ApplyFilter(_context.Spents);
             }

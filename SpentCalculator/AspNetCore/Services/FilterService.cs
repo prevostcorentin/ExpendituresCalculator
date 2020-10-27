@@ -5,9 +5,9 @@ namespace SpentCalculator.Services
 {
     public class FilterService<T>
     {
-        private Filter<T> _filter;
+        private IFilter<T> _filter;
 
-        public FilterService(Filter<T> injectedFilter)
+        public FilterService(IFilter<T> injectedFilter)
         {
             _filter = injectedFilter;
         }
