@@ -1,0 +1,19 @@
+{
+  "app": {
+    "title": "Expenditures calculator"
+  },
+  "menu": {
+    "filter": "Filter"
+  },
+  "navigation": {
+    "home": "Home",
+    "spents": "Expenditures",
+    "about": "About",
+    "admin": "Admin"
+  },
+  "expenditure": {
+    "name": "Name",
+    "datetime": "Date",
+    "amount": "Amount ({0})"
+  }
+}

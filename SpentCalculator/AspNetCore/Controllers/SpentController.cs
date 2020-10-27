@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Text;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft;
-using Newtonsoft.Json.Linq;
 using SpentCalculator.Services;
 using SpentCalculator.Models;
-using Newtonsoft.Json;
 
 namespace SpentCalculator.Controllers
 {
@@ -34,10 +28,19 @@ namespace SpentCalculator.Controllers
         [HttpPost]
         public IEnumerable<Spent> FilterSpents([FromBody] IEnumerable<FilterCriteria> criterias)
         {
-            var filter = new Filter<Spent> { Criterias = criterias };
-            var spentFilterService = new FilterService<Spent>(filter);
-            IEnumerable<Spent> filteredResults = spentFilterService.ApplyFilter(_context.Spents);
+            IEnumerable<Spent> filteredResults; 
+            if (criterias.Count() == 0)
+            {
+                filteredResults = _context.Spents;
+            }
+            else
+            {
+                var filter = new Filter<Spent> { Criterias = criterias };
+                var spentFilterService = new FilterService<Spent>(filter);
+                filteredResults = spentFilterService.ApplyFilter(_context.Spents);
+            }
             return filteredResults;
+
         }
 
         [HttpPut]
