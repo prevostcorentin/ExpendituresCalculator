@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SpentCalculator.csproj" />
+    <ProjectReference Include="..\BackEnd.csproj" />
   </ItemGroup>
 
 </Project>

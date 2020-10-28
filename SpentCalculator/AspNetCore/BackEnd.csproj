@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,15 +8,19 @@
     <Compile Remove="AspNetCore\bin\**" />
     <Compile Remove="AspNetCore\obj\**" />
     <Compile Remove="AspNetCore\SpentCalculatorTest\**" />
+    <Compile Remove="SpentCalculatorTest\**" />
     <Content Remove="AspNetCore\bin\**" />
     <Content Remove="AspNetCore\obj\**" />
     <Content Remove="AspNetCore\SpentCalculatorTest\**" />
+    <Content Remove="SpentCalculatorTest\**" />
     <EmbeddedResource Remove="AspNetCore\bin\**" />
     <EmbeddedResource Remove="AspNetCore\obj\**" />
     <EmbeddedResource Remove="AspNetCore\SpentCalculatorTest\**" />
+    <EmbeddedResource Remove="SpentCalculatorTest\**" />
     <None Remove="AspNetCore\bin\**" />
     <None Remove="AspNetCore\obj\**" />
     <None Remove="AspNetCore\SpentCalculatorTest\**" />
+    <None Remove="SpentCalculatorTest\**" />
   </ItemGroup>
 
   <ItemGroup>
