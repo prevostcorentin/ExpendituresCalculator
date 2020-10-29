@@ -32,8 +32,6 @@ namespace SpentCalculator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SpentDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddScoped<IFilter<Spent>, IFilter<Spent>>();
-            services.AddScoped<FilterService<Spent>, FilterService<Spent>>();
             services.AddRouting();
             services.AddControllers();
             services.AddCors(options =>

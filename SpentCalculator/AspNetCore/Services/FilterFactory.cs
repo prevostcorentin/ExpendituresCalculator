@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using SpentCalculator.Exceptions;
 using SpentCalculator.Services;
 using System;
 using System.Collections.Generic;
@@ -11,27 +12,19 @@ namespace SpentCalculator.Services
     {
         public static IFilter<T> Create(IEnumerable<FilterCriteria> criterias)
         {
-            IEnumerable<FilterCriteria> intervalledCriterias = criterias.Where(ContainsMaxOrMin);
-            IEnumerable<FilterCriteria> strictCriterias = criterias.Except(intervalledCriterias);
-            FilterAggregator<T> filterAggregator = new FilterAggregator<T>();
-            if (intervalledCriterias.Count() > 0)
+            IFilter<T> filter = null;
+            if (criterias.Any(ContainsMaxOrMin))
             {
-                filterAggregator.Filters.Enqueue(new IntervalFilter<T> 
-                {
-                    Criterias = intervalledCriterias 
-                });
+                filter = new FilterAggregator<T> { Criterias = criterias };
             }
-            if (strictCriterias.Count() > 0)
+            else
             {
-                filterAggregator.Filters.Enqueue(new StrictFilter<T>
-                {
-                    Criterias = strictCriterias
-                });
+                filter = new StrictFilter<T> { Criterias = criterias };
             }
-            return filterAggregator;
+            return filter;
         }
 
-        private static bool ContainsMaxOrMin(FilterCriteria criteria)
+        public static bool ContainsMaxOrMin(FilterCriteria criteria)
         {
             if (criteria.Name.ToLower().StartsWith("max") || criteria.Name.ToLower().StartsWith("min"))
             {
