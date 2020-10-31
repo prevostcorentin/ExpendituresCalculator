@@ -1,7 +1,7 @@
 <template>
   <div class="row-fluid">
     <div class="container">
-      <search-bar></search-bar>
+      <filter-bar></filter-bar>
     </div>
     <div class="container">
       <table class="table">
@@ -11,7 +11,28 @@
             <th>{{ $t('expenditure.datetime') }}</th>
             <th>{{ $t('expenditure.amount') }}</th>
           </tr>
-          <item v-for="expenditure in filteredExpenditures" v-bind:expenditure="expenditure"></item>
+          <tr v-for="(expenditure, index) in $store.state.expenditures">
+            <td>
+              <input class="expenditure-input form-element" v-model="expenditure.name" />
+            </td>
+            <td>
+              <input class="expenditure-input form-element" v-model="expenditure.dateTime" />
+            </td>
+            <td>
+              <input class="expenditure-input form-element" v-model="expenditure.amount" />
+            </td>
+            <td><a><i class="fa fa-pencil" v-on:click="$store.dispatch('saveExpenditure', expenditure)" v-on:leave=""></i></a></td>
+            <td><a><i class="fa fa-trash" v-on:click="$store.dispatch('eraseExpenditure', expenditure)"></i></a></td>
+          </tr>
+          <tr>
+            <td v-on:click="$store.dispatch('pushExpenditure', {})">
+              <a><i class="fa fa-plus"></i></a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </thead>
       </table>
     </div>
@@ -19,22 +40,15 @@
 </template>
 
 <script>
-  import ExpenditureSearchBar from '@/components/Expenditures/SearchBar'
-  import ExpenditureItem from '@/components/Expenditures/ExpenditureItem'
+  import FilterBar from '@/components/Expenditures/FilterBar'
 
   export default {
     name: 'ExpenditureIndex',
     created: function () {
-      this.$store.commit('updateExpenditures')
-    },
-    computed: {
-      filteredExpenditures () {
-        return this.$store.state.expenditures
-      }
+      this.$store.dispatch('filterExpenditures')
     },
     components: {
-      'search-bar': ExpenditureSearchBar,
-      'item': ExpenditureItem
+      'filter-bar': FilterBar,
     }
   }
 </script>

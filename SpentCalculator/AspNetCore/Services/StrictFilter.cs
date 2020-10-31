@@ -1,24 +1,16 @@
-﻿using System;
+﻿using SpentCalculator.Services;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace SpentCalculator.Services
 {
-    public struct FilterCriteria
-    {
-        public String Name { get; set; }
-        public Object Value { get; set; }
-
-        public override String ToString() => $"[{Name}]";
-    }
-
-    public class Filter<T>
+    internal class StrictFilter<T> : IFilter<T>
     {
         public IEnumerable<T> Data { get; set; }
         public IEnumerable<FilterCriteria> Criterias { get; set; }
+
         public IEnumerable<T> Result
-        { 
+        {
             get
             {
                 var matchingSet = new Queue<T>();
@@ -33,7 +25,7 @@ namespace SpentCalculator.Services
             }
         }
 
-        public bool IsObjectMatching(object filterable)
+        private bool IsObjectMatching(object filterable)
         {
             foreach (FilterCriteria criteria in Criterias)
             {
@@ -54,7 +46,7 @@ namespace SpentCalculator.Services
             {
                 throw new Exceptions.InvalidCriteriaException(filterable.GetType(), criteria);
             }
-            
+
             object propertyValue = filterable.GetType().GetProperty(criteria.Name).GetValue(filterable);
             if (Utils.Reflection.Equals(criteria.Value, propertyValue))
             {

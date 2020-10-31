@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpentCalculator.Models
 {
     public class Spent
     {
-        public Int32 SpentId { get; set; }
-        public Decimal Amount { get; set; }
+        public Guid SpentId { get; set; }
+        public Single Amount { get; set; }
+        [Required]
         public String Name { get; set; }
         public DateTime DateTime { get; set; }
     }

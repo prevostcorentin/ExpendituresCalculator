@@ -1,20 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using SpentCalculator.Services;
-using SpentCalculator.Models;
-using Microsoft.Extensions.Logging;
-using Newtonsoft;
-using Newtonsoft.Json.Linq;
-using System.IO;
 
 namespace SpentCalculator
 {
@@ -32,10 +21,8 @@ namespace SpentCalculator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SpentDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddScoped<Filter<Spent>, Filter<Spent>>();
-            services.AddScoped<FilterService<Spent>, FilterService<Spent>>();
             services.AddRouting();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
