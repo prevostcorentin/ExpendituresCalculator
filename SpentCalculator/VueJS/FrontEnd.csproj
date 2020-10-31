@@ -8,13 +8,19 @@
   <ItemGroup>
     <Compile Remove="build\**" />
     <Compile Remove="dist\**" />
+    <Compile Remove="js\**" />
     <Compile Remove="node_modules\**" />
+    <Compile Remove="static\**" />
     <EmbeddedResource Remove="build\**" />
     <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="js\**" />
     <EmbeddedResource Remove="node_modules\**" />
+    <EmbeddedResource Remove="static\**" />
     <None Remove="build\**" />
     <None Remove="dist\**" />
+    <None Remove="js\**" />
     <None Remove="node_modules\**" />
+    <None Remove="static\**" />
   </ItemGroup>
 
 </Project>

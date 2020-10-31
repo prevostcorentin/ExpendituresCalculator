@@ -14,24 +14,8 @@ namespace SpentCalculator.Services
 
         public IEnumerable<T> ApplyFilter(IEnumerable<T> data)
         {
-            TransformCriterias();
             _filter.Data = data;
             return _filter.Result;
-        }
-
-        private void TransformCriterias()
-        {
-            List<FilterCriteria> typedCriterias = new List<FilterCriteria>();
-            foreach (FilterCriteria criteria in _filter.Criterias)
-            {
-                FilterCriteria singleCriteria = new FilterCriteria
-                {
-                    Name = criteria.Name,
-                    Value = JsonTransformer.JsonElementToTypedValue((JsonElement)criteria.Value)
-                };
-                typedCriterias.Add(singleCriteria);
-            }
-            _filter.Criterias = typedCriterias;
         }
     }
 }

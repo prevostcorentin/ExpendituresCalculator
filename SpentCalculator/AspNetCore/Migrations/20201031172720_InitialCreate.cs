@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SpentCalculator.Migrations
+namespace ExpendituresCalculator.Migrations
 {
-    public partial class _0 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,8 @@ namespace SpentCalculator.Migrations
                 columns: table => new
                 {
                     SpentId = table.Column<Guid>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Amount = table.Column<float>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

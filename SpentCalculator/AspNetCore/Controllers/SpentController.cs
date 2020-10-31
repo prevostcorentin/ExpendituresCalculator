@@ -26,7 +26,7 @@ namespace SpentCalculator.Controllers
         }
 
         [HttpPost]
-        public IEnumerable<Spent> FilterSpents([FromBody] IEnumerable<FilterCriteria> criterias)
+        public IEnumerable<Spent> FilterSpents(IEnumerable<FilterCriteria> criterias)
         {
             IEnumerable<Spent> filteredResults;
             if (criterias.Count() == 0)
@@ -44,9 +44,17 @@ namespace SpentCalculator.Controllers
         }
 
         [HttpPut]
-        public void AddSpent([FromBody] Spent newSpent)
+        public void AddSpent(Spent newSpent)
         {
-            _context.Spents.Add(newSpent);
+            if (_context.Spents.Any(s => s.SpentId == newSpent.SpentId))
+            {
+                _context.Spents.Update(newSpent);
+            }
+            else
+            {
+                _context.Spents.Add(newSpent);
+            }
+            _context.SaveChanges();
         }
     }
 }

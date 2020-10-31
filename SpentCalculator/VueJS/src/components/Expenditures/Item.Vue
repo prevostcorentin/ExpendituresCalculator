@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="expenditure-item">
     <td>{{ expenditure.name }}</td>
     <td>{{ expenditure.dateTime }}</td>
     <td>{{ expenditure.amount }}</td>
@@ -14,3 +14,10 @@
     props: ['expenditure']
   }
 </script>
+
+<style scoped>
+  tr :hover
+  {
+    background-color: lightblue;
+  }
+</style>
