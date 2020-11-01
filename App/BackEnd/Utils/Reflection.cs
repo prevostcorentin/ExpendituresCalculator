@@ -48,7 +48,6 @@ namespace ExpendituresCalculator.Utils
                          .Any(name => name == propertyName.ToLower());
         }
 
-
         public static bool EntityEquals(Object x, Object y)
         {
             var typedValues = AdaptTypes(x.GetType(), x, y);
@@ -70,6 +69,8 @@ namespace ExpendituresCalculator.Utils
                 dynamic untyped = objects[i];
                 if (untyped == null)
                 {
+                    // Activator.CreateInstance static method generates the default value for a given type
+                    // ref: https://docs.microsoft.com/en-us/dotnet/api/system.activator.createinstance?view=netcore-3.1#System_Activator_CreateInstance_System_Type_
                     untyped = Activator.CreateInstance(adaptedType);
                 }
                 dynamic typed = Convert.ChangeType(untyped, adaptedType);
