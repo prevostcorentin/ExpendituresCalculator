@@ -79,7 +79,7 @@ namespace ExpendituresCalculatorTest
             {
                 new Expenditure { ExpenditureId = new Guid(), Amount = 501F, Name = "Out" },
                 new Expenditure { ExpenditureId = new Guid(), Amount = 500F, Name = "In" },
-                new Expenditure { ExpenditureId = new Guid(), Amount = 1F, Name = "In" }
+                new Expenditure { ExpenditureId = new Guid(), Amount = 1F, Name = "Out" }
             };
 
             IEnumerable<FilterCriteria> criterias = new List<FilterCriteria>
@@ -98,9 +98,7 @@ namespace ExpendituresCalculatorTest
         {
             _expenditures = new List<Expenditure>
             {
-                new Expenditure { ExpenditureId = new Guid(), Amount = 501F, Name = "Out" },
                 new Expenditure { ExpenditureId = new Guid(), Amount = 500F, Name = "In" },
-                new Expenditure { ExpenditureId = new Guid(), Amount = 500F, Name = "Out" },
                 new Expenditure { ExpenditureId = new Guid(), Amount = 501F, Name = "Out" },
                 new Expenditure { ExpenditureId = new Guid(), Amount = 1F, Name = "Out" }
             };
