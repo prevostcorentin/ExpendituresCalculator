@@ -47,6 +47,7 @@ namespace ExpendituresCalculator.Utils
         }
 
         public static bool ValueBetween(dynamic value, params Object[] objects)
+
         {
             dynamic[] typedValues = AdaptTypes(value.GetType(), objects);
             Array.Sort(typedValues);
