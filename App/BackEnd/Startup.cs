@@ -48,7 +48,9 @@ namespace ExpendituresCalculator
                 app.UseCors();
             }
             app.UseRouting();
-            app.UseEndpoints(routes => routes.MapControllers());
+            app.UseEndpoints(routes =>
+                routes.MapDefaultControllerRoute()
+            );
         }
     }
 }
