@@ -8,11 +8,11 @@ namespace ExpendituresCalculator.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class SpentController : ControllerBase
+    public class ExpenditureController : ControllerBase
     {
         private ExpendituresCalculatorDbContext _context;
 
-        public SpentController(ExpendituresCalculatorDbContext injectedDbContext)
+        public ExpenditureController(ExpendituresCalculatorDbContext injectedDbContext)
         {
             _context = injectedDbContext;
         }
@@ -20,7 +20,7 @@ namespace ExpendituresCalculator.Controllers
         [HttpGet]
         public IEnumerable<Expenditure> GetAllSpents()
         {
-            return _context.Spents;
+            return _context.Expenditures;
         }
 
         [HttpPost]
@@ -29,13 +29,13 @@ namespace ExpendituresCalculator.Controllers
             IEnumerable<Expenditure> filteredResults;
             if (criterias.Count() == 0)
             {
-                filteredResults = _context.Spents;
+                filteredResults = _context.Expenditures;
             }
             else
             {
                 var filter = FilterFactory<Expenditure>.Create(criterias);
                 var spentFilterService = new FilterService<Expenditure>(filter);
-                filteredResults = spentFilterService.ApplyFilter(_context.Spents);
+                filteredResults = spentFilterService.ApplyFilter(_context.Expenditures);
             }
             return filteredResults;
 
@@ -44,13 +44,13 @@ namespace ExpendituresCalculator.Controllers
         [HttpPut]
         public void AddSpent(Expenditure newSpent)
         {
-            if (_context.Spents.Any(s => s.ExpenditureId == newSpent.ExpenditureId))
+            if (_context.Expenditures.Any(s => s.ExpenditureId == newSpent.ExpenditureId))
             {
-                _context.Spents.Update(newSpent);
+                _context.Expenditures.Update(newSpent);
             }
             else
             {
-                _context.Spents.Add(newSpent);
+                _context.Expenditures.Add(newSpent);
             }
             _context.SaveChanges();
         }
