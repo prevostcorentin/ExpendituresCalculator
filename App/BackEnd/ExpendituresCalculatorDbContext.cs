@@ -14,6 +14,6 @@ namespace ExpendituresCalculator
         {
         }
 
-        public DbSet<Expenditure> Spents { get; set; }
+        public DbSet<Expenditure> Expenditures { get; set; }
     }
 }
