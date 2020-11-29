@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using ExpendituresCalculator.Services;
 using ExpendituresCalculator.Models;
 
-namespace ExpendituresCalculator.Controllers
+namespace ExpendituresCalculator.BackEnd.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ExpenditureController : ControllerBase
     {
         private ExpendituresCalculatorDbContext _context;
