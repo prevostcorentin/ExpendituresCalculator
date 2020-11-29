@@ -17,7 +17,8 @@ namespace ExpendituresCalculator
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseUrls("http://0.0.0.0:80", "https://0.0.0.0:443");
+                    webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://0.0.0.0:80", "https://0.0.0.0:443");
                 });
     }
 }
