@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "FrontEnd": {
-      "commandName": "Executable",
-      "executablePath": "npm run watch",
-      "workingDirectory": "C:\\Users\\Dell\\source\\repos\\SpentCalculator\\SpentCalculator\\VueJS"
-    }
-  }
-}
