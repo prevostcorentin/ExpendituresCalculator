@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ExpendituresCalculator
 {
@@ -20,7 +21,9 @@ namespace ExpendituresCalculator
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ExpendituresCalculatorDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<ExpendituresCalculatorDbContext>(options => 
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
+            );
             services.AddRouting();
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors(options =>
@@ -28,7 +31,8 @@ namespace ExpendituresCalculator
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.AllowAnyOrigin()
+                        String[] origins = Configuration["Cors:AllowedHosts"].Split(',');
+                        builder.WithOrigins(origins)
                                .AllowAnyMethod()
                                .AllowAnyHeader();
                     });
@@ -38,15 +42,14 @@ namespace ExpendituresCalculator
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (!env.IsProduction())
             {
                 app.UseExceptionHandler(new ExceptionHandlerOptions
                 {
                     ExceptionHandler = new Exceptions.JsonExceptionMiddleware().Invoke
                 });
-                app.UseStaticFiles();
-                app.UseCors();
             }
+            app.UseCors();
             app.UseRouting();
             app.UseEndpoints(routes => routes.MapControllers());
         }
