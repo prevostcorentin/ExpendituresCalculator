@@ -49,6 +49,10 @@ namespace ExpendituresCalculator
                     ExceptionHandler = new Exceptions.JsonExceptionMiddleware().Invoke
                 });
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
             app.UseCors();
             app.UseRouting();
             app.UseEndpoints(routes =>
